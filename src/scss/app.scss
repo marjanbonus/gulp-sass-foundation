@@ -1,0 +1,19 @@
+//Import Foundation by ZURB
+
+	@import "custom/foundation";
+
+//Import custom components
+
+	@import "custom/grid";
+	@import "custom/global";
+	@import "custom/buttons";
+	@import "custom/forms";
+	@import "custom/image";
+	@import "custom/labels";
+	@import "custom/lists";
+	@import "custom/tables";
+	@import "custom/text";
+
+//Font awesome
+	$fa-font-path: "../bower_components/components-font-awesome/fonts";
+	@import "../../bower_components/components-font-awesome/scss/font-awesome"; 

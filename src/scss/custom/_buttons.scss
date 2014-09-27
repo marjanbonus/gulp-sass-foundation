@@ -1,0 +1,6 @@
+.button--primary {
+	border-bottom: 6px solid darken($green, 7%);
+}
+.button {
+	@extend .button--primary;
+}
