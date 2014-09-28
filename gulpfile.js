@@ -8,6 +8,7 @@ var gulp = require('gulp'),
     notify = require('gulp-notify'),
     rimraf = require('gulp-rimraf'),
     uncss = require('gulp-uncss'),
+    glob = require('glob'),
     browserSync = require('browser-sync');
 var env = process.env.NODE_ENV || 'development';
 
@@ -18,7 +19,7 @@ gulp.task('sass', function() {
         .pipe(gulpif(env === 'development', sass({errLogToConsole: true})))
         .pipe(gulpif(env === 'development', sourcemaps.write()))
         .pipe(gulpif(env === 'production', sass({errLogToConsole: true})))
-        .pipe(uncss({html: ['index.html']}))
+        .pipe(uncss({html: glob.sync('index.html')}))
         .pipe(gulpif(env === 'production', minifycss()))
         .pipe(gulp.dest('css'))
         .pipe(notify({
@@ -67,6 +68,7 @@ gulp.task('watch', function() {
    
         // Watch .scss files
         gulp.watch('src/scss/**/*.scss', ['sass']);      
+        // Watch .html files
         gulp.watch('index.html', browserSync.reload);
         // Watch .js files
         gulp.watch('src/js/**/*.js', ['js']); 
@@ -74,6 +76,6 @@ gulp.task('watch', function() {
 });
 
 // Default task
-gulp.task('default', ['sass', 'js', 'watch', 'browser-sync'], function() {
+gulp.task('default', ['browser-sync', 'sass', 'js', 'watch'], function() {
 
 });
