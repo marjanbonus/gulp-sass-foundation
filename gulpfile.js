@@ -7,6 +7,7 @@ var gulp = require('gulp'),
     gulpif = require('gulp-if'),
     notify = require('gulp-notify'),
     rimraf = require('gulp-rimraf'),
+    uncss = require('gulp-uncss'),
     browserSync = require('browser-sync');
 var env = process.env.NODE_ENV || 'development';
 
@@ -17,6 +18,7 @@ gulp.task('sass', function() {
         .pipe(gulpif(env === 'development', sass({errLogToConsole: true})))
         .pipe(gulpif(env === 'development', sourcemaps.write()))
         .pipe(gulpif(env === 'production', sass({errLogToConsole: true})))
+        .pipe(uncss({html: ['index.html']}))
         .pipe(gulpif(env === 'production', minifycss()))
         .pipe(gulp.dest('css'))
         .pipe(notify({
